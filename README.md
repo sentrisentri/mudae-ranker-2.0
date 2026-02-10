@@ -1,5 +1,29 @@
 # Mudae Ranker
- Preference-based Mudae collection ranking app
+Preference-based Mudae collection ranking app - Desktop Edition
+
+## Installation
+
+1. Install Node.js from https://nodejs.org/ (if not already installed)
+2. Open a terminal in this directory
+3. Run: `npm install`
+
+## Running the Application
+
+To start the desktop app:
+```
+npm start
+```
+
+## Building a Standalone Executable
+
+To create an installable version:
+```
+npm run build
+```
+
+The executable will be created in the `dist` folder.
+
+---
 
 ## Summary
 Original concept by: [DarkMage530](https://github.com/jonmervine)

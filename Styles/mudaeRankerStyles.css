@@ -1,50 +1,159 @@
-body
-{
-	font-family: Calibri, Helvetica, Arial;
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
-.InputField, .OutputField
-{
-	resize: none;
-	width: 45%;
-	height: 10em;
+body {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+	background: #fafafa;
+	min-height: 100vh;
+	padding: 40px 20px;
+	color: #333;
 }
 
-.CharacterCardContainer
-{
+.app-container {
+	max-width: 1400px;
+	margin: 0 auto;
+}
+
+.app-header {
+	text-align: center;
+	color: #333;
+	margin-bottom: 40px;
+}
+
+.app-header h1 {
+	font-size: 32px;
+	font-weight: 400;
+	margin-bottom: 8px;
+	letter-spacing: -0.5px;
+}
+
+.app-header p {
+	font-size: 14px;
+	color: #666;
+}
+
+.input-output-section {
 	display: flex;
+	gap: 16px;
+	margin-bottom: 16px;
 	flex-wrap: wrap;
 }
 
-.CharacterThumb
-{
-	background-color: rgba(255,255,255,.9);
-	border-color: rgb(20,20,20);
-	border-radius: 6px;
-	border-style: solid;
-	border-width: 1px;
-	box-shadow: 2px 2px 3px rgb(90,90,90);
-	box-sizing: border-box;
-	width: 5%;
-	padding: 3px;
-	display: flex;
-	margin: 3px;
+.InputField, .OutputField {
+	resize: vertical;
+	flex: 1;
+	min-width: 300px;
+	min-height: 120px;
+	padding: 12px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	font-family: 'Consolas', 'Monaco', monospace;
+	font-size: 13px;
+	background: white;
+	transition: border-color 0.2s;
+	outline: none;
+}
+
+.InputField:focus, .OutputField:focus {
+	border-color: #333;
+}
+
+.InputField::placeholder, .OutputField::placeholder {
+	color: #aaa;
+}
+
+.characters-section {
+	background: white;
+	padding: 20px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	margin-top: 16px;
+}
+
+/* Button Container */
+.button-container {
+	text-align: center;
+	margin: 16px 0;
+	background: white;
+	padding: 16px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+
+button {
+	background: white;
+	color: #333;
+	border: 1px solid #ddd;
+	padding: 8px 16px;
+	border-radius: 4px;
+	font-size: 13px;
+	font-weight: 400;
 	cursor: pointer;
+	margin: 4px;
+	transition: all 0.2s;
 }
 
-.CharacterThumb .CharacterName
-{
-	display: none;
-	font-size: 80%;
-	font-weight: bold;
-	overflow: hidden;
+button:hover:not(:disabled) {
+	background: #f5f5f5;
+	border-color: #333;
 }
 
-.CharacterThumb .CharacterSeries
-{
-	display: none;
-	font-size: 100%;
+button:active:not(:disabled) {
+	background: #eee;
+}
+
+button:disabled {
+	background: #fafafa;
+	color: #aaa;
+	cursor: not-allowed;
+	border-color: #eee;
+}
+
+.CharacterCardContainer {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	padding: 8px 0;
+}
+
+.CharacterThumb {
+	background: white;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	box-sizing: border-box;
+	width: calc((100% - 72px) / 10);
+	min-width: 60px;
+	max-width: 110px;
+	padding: 2px;
+	display: flex;
+	margin: 0;
+	cursor: pointer;
+	transition: border-color 0.2s;
 	overflow: hidden;
+	aspect-ratio: 1 / 1;
+}
+
+.CharacterThumb:hover {
+	border-color: #333;
+}
+
+.CharacterThumb .CharacterName {
+	display: none;
+	font-size: 13px;
+	font-weight: 700;
+	overflow: hidden;
+	color: #2d3748;
+	margin-bottom: 4px;
+}
+
+.CharacterThumb .CharacterSeries {
+	display: none;
+	font-size: 12px;
+	overflow: hidden;
+	color: #718096;
 }
 
 .CharacterThumb.CharacterMissingImage .CharacterName, .CharacterThumb.CharacterMissingImage .CharacterSeries
@@ -56,7 +165,9 @@ body
 {
 	width: 100%;
 	height: 100%;
-	border-radius: 6px;
+	object-fit: contain;
+	background: #f7f7f7;
+	border-radius: 3px;
 }
 
 .CharacterThumb .CharacterURL
@@ -76,22 +187,26 @@ body
 	display: none;
 }
 
-.CharacterThumb.CharacterFull
-{
+.CharacterThumb.CharacterFull {
 	display: inline-block;
+	position: static;
 	width: auto;
-	max-width: 30%;
-	padding: 4px;
+	max-width: 320px;
+	padding: 10px;
 	cursor: auto;
+	border: 1px solid #ddd;
+	background: white;
+	overflow: visible;
 }
 
-.CharacterThumb.CharacterFull .CharacterName
-{
+.CharacterThumb.CharacterFull .CharacterName {
 	display: block;
-	font-size: 100%;
-	font-weight: bold;
-	margin: 2px 0;
-	padding: 2px;
+	font-size: 16px;
+	font-weight: 500;
+	margin: 0 0 12px 0;
+	padding: 0 0 12px 0;
+	border-bottom: 1px solid #eee;
+	color: #333;
 }
 
 .CharacterNameText
@@ -99,17 +214,31 @@ body
 	float: left;
 }
 
-.CharacterClose
-{
+.CharacterClose {
 	cursor: pointer;
 	float: right;
+	font-size: 18px;
+	color: #666;
+	transition: color 0.2s;
+	line-height: 1;
 }
 
-.CharacterDelete
-{
+.CharacterClose:hover {
+	color: #333;
+}
+
+.CharacterDelete {
 	cursor: pointer;
 	display: none;
 	float: right;
+	font-size: 16px;
+	color: #666;
+	transition: color 0.2s;
+	margin-left: 10px;
+}
+
+.CharacterDelete:hover {
+	color: #333;
 }
 
 .EditMode .CharacterDelete
@@ -117,54 +246,90 @@ body
 	display: inline;
 }
 
-.CharacterThumb.CharacterFull .CharacterSeries
-{
+.CharacterThumb.CharacterFull .CharacterSeries {
 	display: block;
-	font-size: 100%;
-	margin: 2px 0;
+	font-size: 14px;
+	margin: 10px 0;
+	color: #718096;
+	font-style: italic;
 }
 
-.CharacterThumb.CharacterFull img
-{
+.CharacterThumb.CharacterFull img {
 	display: block;
+	width: 100%;
 	height: auto;
+	max-height: none;
+	object-fit: contain;
+	background: #f7f7f7;
+	border-radius: 4px;
+	margin: 8px 0;
 }
 
-.CharacterThumb.CharacterFull .CharacterURL, .CharacterThumb.CharacterFull .CharacterSkip
-{
+.CharacterThumb.CharacterFull .CharacterURL, .CharacterThumb.CharacterFull .CharacterSkip {
 	display: block;
 	text-align: center;
+	margin: 12px 0;
 }
 
-.CharacterThumb.CharacterFull .CharacterURL input[type="text"]
-{
-	width: 75%;
+.CharacterThumb.CharacterFull .CharacterURL label {
+	color: #4a5568;
+	font-size: 13px;
+	font-weight: 600;
 }
 
-.EditMode .CharacterThumb.CharacterFull
-{
-	left: 50%;
-	position: fixed;
-	top: 50%;
-	transform: translate(-50%, -50%) translateZ(0) !important;
+.CharacterThumb.CharacterFull .CharacterURL input[type="text"] {
+	width: 100%;
+	padding: 6px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	margin-top: 5px;
+	font-size: 12px;
+	font-family: 'Consolas', monospace;
 }
 
-.CharacterThumb .CharacterNew
-{
-	font-size: 3.5vw;
+.CharacterThumb.CharacterFull .CharacterURL input[type="text"]:focus {
+	outline: none;
+	border-color: #333;
+}
+
+.CharacterThumb.CharacterFull .CharacterSkip label {
+	color: #4a5568;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.CharacterThumb.CharacterFull .CharacterSkip input[type="checkbox"] {
+	margin-right: 8px;
+	width: 18px;
+	height: 18px;
+	cursor: pointer;
+}
+
+.EditMode .CharacterThumb.CharacterFull {
+	display: inline-block;
+}
+
+.CharacterThumb .CharacterNew {
+	font-size: 48px;
 	margin: auto;
+	transition: transform 0.2s ease;
 }
 
-.NewCharacterCard
-{
-	min-width:20%;
+.CharacterThumb:hover .CharacterNew {
+	transform: scale(1.05);
+}
+
+.NewCharacterCard {
+	min-width: 300px;
 }
 
 /******************* Rank Mode *******************/
 
-.RankingBlocker
-{
-	background-color:rgb(0,0,0,.5);
+.RankingBlocker {
+	background: rgba(0, 0, 0, 0.8);
+	backdrop-filter: blur(4px);
+	bottom: 0;5);
 	bottom: 0;
 	display: none;
 	left: 0;
@@ -174,58 +339,64 @@ body
 	z-index: -1;
 }
 
-.RankMode .RankingBlocker
-{
+.RankMode .RankingBlocker {
 	display: block;
 	z-index: auto;
 }
 
-.RankingContainer .CharacterThumb.CharacterFull
-{
-	max-width: 50%;
+.RankingContainer .CharacterThumb.CharacterFull {
+	max-width: 220px;
 	cursor: pointer;
+	margin: 8px;
+	transition: border-color 0.2s;
 }
 
-.RankMode .CharacterClose
-{
-	display: none;
+.RankingContainer .CharacterThumb.CharacterFull:hover {
+	border-color: #333;
 }
 
-.RankingContainer
-{
+.RankingContainer {
 	left: 50%;
 	position: fixed;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	
-	background-color: rgb(255,255,255);
-	border-color: rgb(20,20,20);
-	border-radius: 6px;
-	border-style: solid;
-	border-width: 1px;
-	box-shadow: 6px 6px 4px rgba(0,0,0,.7);
+	background: white;
+	border: none;
+	border-radius: 16px;
+	box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
 	box-sizing: border-box;
-	
 	display: none;
-	
-	padding: 10px;
+	padding: 30px;
+	max-widt1px solid #ddd;
+	border-radius: 4px;
+	box-sizing: border-box;
+	display: none;
+	padding: 24ainerTitle {
+	font-weight: 700;
+	font-size: 24px;
+	color: #1a202c;
+	margin-bottom: 20px;
+	text-align: center;
 }
 
-.RankingContainerTitle
-{
-	font-weight: bold;
-	font-size: 1.5em;
+.RankingContai400;
+	font-size: 18px;
+	color: #333;
+	margin-bottom: 20px;
+	text-align: center;
 }
 
-.RankingContainerClose
-{
+.RankingContainerClose {
 	cursor: pointer;
 	float: right;
+	font-size: 20px;
+	color: #666;
+	transition: color 0.2s;
 }
 
-.RankingCardContainer
-{
-	display: flex;
+.RankingContainerClose:hover {
+	color: #333
+	flex-wrap: wrap;
 }
 
 /******************* Output Field Flash *******************/
