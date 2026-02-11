@@ -5,7 +5,8 @@ mudaeRanker.directive('mudrRankingResume', ['Characters', function(Characters) {
 		link: function(scope, element, attrs) {
 			element.on('click', function(event) {
 				Characters.resumeRankMode();
-				scope.$apply();
+				scope.$applyAsync();
+				event.stopPropagation();
 			});
 		}
 	}

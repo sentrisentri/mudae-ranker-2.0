@@ -8,10 +8,11 @@ mudaeRanker.directive('mudrReset', ['Characters', 'Utilities', function(Characte
 					$('#InputField').val('');
 					$('#OutputField').val('');
 					Characters.clean();
-					scope.$apply();
+					scope.$applyAsync();
 				}).fail(function (data, button) {
 					console.log('Then why did you click the reset button?');
 				});
+				event.stopPropagation();
 			});
 		}
 	}

@@ -27,7 +27,7 @@ mudaeRanker.directive('mudrRankingStart', ['Characters', 'Utilities', function(C
 						{
 							Characters.resumeRankMode();
 						}
-						scope.$apply();
+						scope.$applyAsync();
 					}).fail(function (data, button) {
 						console.log('Fine then, stay in Edit mode');
 					});
@@ -35,8 +35,9 @@ mudaeRanker.directive('mudrRankingStart', ['Characters', 'Utilities', function(C
 				else
 				{
 					Characters.startRankMode();
-					scope.$apply();
+					scope.$applyAsync();
 				}
+				event.stopPropagation();
 			});
 		}
 	}

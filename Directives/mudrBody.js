@@ -7,7 +7,10 @@ mudaeRanker.directive('mudrBody', ['Characters', function(Characters) {
 				if (!Characters.inMessageBox)
 				{
 					Characters.minimizeActiveCard();
-					scope.$apply();
+					if (!scope.$$phase && !scope.$root.$$phase)
+					{
+						scope.$applyAsync();
+					}
 				}
 			});
 		}

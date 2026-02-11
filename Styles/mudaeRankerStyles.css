@@ -12,6 +12,55 @@ body {
 	color: #333;
 }
 
+.DarkMode body,
+.DarkMode {
+	background: #0f1116;
+	color: #e5e7eb;
+}
+
+.DarkMode .app-header h1,
+.DarkMode .app-header p {
+	color: #e5e7eb;
+}
+
+.DarkMode .button-container,
+.DarkMode .characters-section,
+.DarkMode .CharacterThumb,
+.DarkMode .CharacterThumb.CharacterFull,
+.DarkMode .RankingContainer {
+	background: #1a1d24;
+	border-color: #2a2f3a;
+	color: #e5e7eb;
+}
+
+.DarkMode .InputField,
+.DarkMode .OutputField {
+	background: #161921;
+	color: #e5e7eb;
+	border-color: #2a2f3a;
+}
+
+.DarkMode button {
+	background: #1f2430;
+	color: #e5e7eb;
+	border-color: #2a2f3a;
+}
+
+.DarkMode button:hover:not(:disabled) {
+	background: #262c3a;
+	border-color: #e5e7eb;
+}
+
+.DarkMode .CharacterThumb:hover,
+.DarkMode .RankingContainer .CharacterThumb.CharacterFull:hover {
+	border-color: #e5e7eb;
+}
+
+.DarkMode .CharacterThumb img,
+.DarkMode .CharacterThumb.CharacterFull img {
+	background: #0f1116;
+}
+
 .app-container {
 	max-width: 1400px;
 	margin: 0 auto;
@@ -71,6 +120,23 @@ body {
 	border: 1px solid #ddd;
 	border-radius: 4px;
 	margin-top: 16px;
+}
+
+.mode-toggle {
+	display: flex;
+	gap: 16px;
+	align-items: center;
+	margin: 0 0 16px 0;
+	font-size: 13px;
+	color: #333;
+}
+
+.mode-toggle input[type="radio"] {
+	margin-right: 6px;
+}
+
+.DarkMode .mode-toggle {
+	color: #e5e7eb;
 }
 
 /* Button Container */
@@ -207,6 +273,11 @@ button:disabled {
 	padding: 0 0 12px 0;
 	border-bottom: 1px solid #eee;
 	color: #333;
+}
+
+.DarkMode .CharacterThumb.CharacterFull .CharacterName {
+	color: #e5e7eb;
+	border-bottom-color: #2a2f3a;
 }
 
 .CharacterNameText

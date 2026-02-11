@@ -5,7 +5,8 @@ mudaeRanker.directive('mudrRankingStop', ['Characters', function(Characters) {
 		link: function(scope, element, attrs) {
 			element.on('click', function(event) {
 				Characters.pauseRankMode();
-				scope.$apply();
+				scope.$applyAsync();
+				event.stopPropagation();
 			});
 		}
 	}

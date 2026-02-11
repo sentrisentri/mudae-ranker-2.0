@@ -5,6 +5,8 @@ mudaeRanker.directive('mudrParseInput', ['Characters', function(Characters) {
 		link: function(scope, element, attrs) {
 			element.on('click', function(event) {
 				Characters.parseInputField($('#InputField').first().val());
+				scope.$applyAsync();
+				event.stopPropagation();
 			});
 		}
 	}

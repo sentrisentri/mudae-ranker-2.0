@@ -5,6 +5,8 @@ mudaeRanker.directive('mudrExportJson', ['Characters', function(Characters) {
 		link: function(scope, element, attrs) {
 			element.on('click', function(event) {
 				Characters.exportJson();
+				scope.$applyAsync();
+				event.stopPropagation();
 			});
 		}
 	}

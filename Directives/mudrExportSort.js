@@ -5,6 +5,8 @@ mudaeRanker.directive('mudrExportSort', ['Characters', function(Characters) {
 		link: function(scope, element, attrs) {
 			element.on('click', function(event) {
 				Characters.exportSort();
+				scope.$applyAsync();
+				event.stopPropagation();
 			});
 		}
 	}

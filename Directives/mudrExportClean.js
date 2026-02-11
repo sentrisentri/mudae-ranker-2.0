@@ -5,6 +5,8 @@ mudaeRanker.directive('mudrExportClean', [function() {
 		link: function(scope, element, attrs) {
 			element.on('click', function(event) {
 				$('#OutputField').val('');
+				scope.$applyAsync();
+				event.stopPropagation();
 			});
 		}
 	}

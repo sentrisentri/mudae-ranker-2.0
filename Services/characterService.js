@@ -84,6 +84,45 @@ mudaeRanker.service('Characters', ['$http', '$interval', '$rootScope', 'MergeCod
 			{
 				return;
 			}
+
+			if (service.inputMode === 'mmi-s')
+			{
+				// Simple list format: "Name - url" per line
+				var lines = inputText.split('\n');
+				for (var i = 0; i < lines.length; i++)
+				{
+					var line = lines[i].trim();
+					if (!line)
+					{
+						continue;
+					}
+
+					var imageURLIndex = line.lastIndexOf(' - https:');
+					var characterImage = null;
+					if (imageURLIndex > 0)
+					{
+						characterImage = line.substring(imageURLIndex + 3).trim();
+					}
+
+					var originalName = line.replace(/ - https:.*/i, '').replace(/(?: \| .*)?/gi, '').trim();
+					var characterName = originalName.replace(/(?: \([A-Z]+\))?/gi, '').trim();
+
+					var character = {
+						className: 'CharacterThumb',
+						imageUrl: characterImage,
+						minimizedName: Utilities.minimizeName(characterName),
+						name: characterName,
+						originalName: originalName,
+						series: 'Unknown',
+						skip: false
+					};
+
+					service.addCharacter(character);
+				}
+
+				Utilities.showSuccess('Done processing the input', true);
+				return;
+			}
 			
 			var mergeCharacters = false;
 
@@ -372,6 +411,28 @@ mudaeRanker.service('Characters', ['$http', '$interval', '$rootScope', 'MergeCod
 
 		/* Start Mode Support */
 		mode: Mode.Edit,
+		inputMode: 'mmai-s',
+
+		getInputMode: function ()
+		{
+			return service.inputMode;
+		},
+
+		setInputMode: function (mode)
+		{
+			service.inputMode = mode;
+		},
+		isDarkMode: false,
+
+		getThemeClassName: function ()
+		{
+			return service.isDarkMode ? 'DarkMode' : 'LightMode';
+		},
+
+		toggleTheme: function ()
+		{
+			service.isDarkMode = !service.isDarkMode;
+		},
 		
 		getModeClassName: function ()
 		{

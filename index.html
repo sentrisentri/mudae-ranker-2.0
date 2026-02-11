@@ -46,7 +46,7 @@
 	<link rel="stylesheet" type="text/css" href="Styles/mudaeRankerStyles.css">
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-message-box@3.1.0/dist/messagebox.min.css"> <!-- https://gasparesganga.com/labs/jquery-message-box/ -->
 </head>
-<body data-ng-app="mudaeRanker" data-ng-controller="mudaeRankerController" data-ng-attr-class="{{ getModeClassName() }}" data-mudr-body>
+<body data-ng-app="mudaeRanker" data-ng-controller="mudaeRankerController" data-ng-attr-class="{{ getModeClassName() }} {{ getThemeClassName() }}" data-mudr-body>
 	<div class="app-container">
 		<header class="app-header">
 			<h1>Mudae Ranker</h1>
@@ -58,6 +58,11 @@
 			<textarea id="OutputField" class="OutputField" placeholder="Exported results will show up here" spellcheck="false"></textarea>
 		</div>
 
+		<div class="mode-toggle">
+			<label><input type="radio" name="inputMode" value="mmai-s" data-ng-model="inputMode" data-ng-change="setInputMode(inputMode)"> $mmai-s</label>
+			<label><input type="radio" name="inputMode" value="mmi-s" data-ng-model="inputMode" data-ng-change="setInputMode(inputMode)"> $mmi-s</label>
+		</div>
+
 		<div class="button-container">
 			<button data-mudr-parse-input>Parse Input</button>
 			<button data-mudr-ranking-start data-ng-disabled="!hasCharacters()">Start Ranking</button>
@@ -66,6 +71,7 @@
 			<button data-mudr-export-sort data-ng-disabled="!hasCharacters()">Generate Commands</button>
 			<button data-mudr-export-clean>Clean Output</button>
 			<button data-mudr-reset>Reset</button>
+			<button data-ng-click="toggleTheme()">Toggle Theme</button>
 		</div>
 
 		<div class="characters-section">
